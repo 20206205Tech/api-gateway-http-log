@@ -11,15 +11,15 @@ describe('ApiLogs E2E Tests', () => {
     app = await main(AppModule);
   });
 
-  describe('POST /api/api-logs - Authorization', () => {
+  describe('POST /api-logs - Authorization', () => {
     it('should reject request without authorization token', async () => {
       const logData = {
         client_ip: '192.168.1.1',
-        request: { uri: '/api/test', method: 'GET' },
+        request: { uri: '/test', method: 'GET' },
       };
 
       await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .send(logData)
         .expect(401);
     });
@@ -27,11 +27,11 @@ describe('ApiLogs E2E Tests', () => {
     it('should reject request with invalid token', async () => {
       const logData = {
         client_ip: '192.168.1.1',
-        request: { uri: '/api/test', method: 'GET' },
+        request: { uri: '/test', method: 'GET' },
       };
 
       await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', 'Bearer invalid-token')
         .send(logData)
         .expect(401);
@@ -40,26 +40,26 @@ describe('ApiLogs E2E Tests', () => {
     it('should reject request with empty token', async () => {
       const logData = {
         client_ip: '192.168.1.1',
-        request: { uri: '/api/test', method: 'GET' },
+        request: { uri: '/test', method: 'GET' },
       };
 
       await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', '')
         .send(logData)
         .expect(401);
     });
   });
 
-  describe('POST /api/api-logs - Bulk and Single Ingestion', () => {
+  describe('POST /api-logs - Bulk and Single Ingestion', () => {
     it('should create a single log entry with valid token', async () => {
       const logData = {
         client_ip: '192.168.1.1',
         request: {
-          uri: '/api/test',
+          uri: '/test',
           method: 'GET',
           headers: { host: 'example.com' },
-          url: 'https://example.com/api/test',
+          url: 'https://example.com/test',
         },
         response: {
           status: 200,
@@ -67,7 +67,7 @@ describe('ApiLogs E2E Tests', () => {
       };
 
       const response = await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', VALID_BEARER_TOKEN)
         .send(logData)
         .expect(201);
@@ -83,18 +83,18 @@ describe('ApiLogs E2E Tests', () => {
       const logsData = [
         {
           client_ip: '192.168.1.1',
-          request: { uri: '/api/test1', method: 'GET' },
+          request: { uri: '/test1', method: 'GET' },
           response: { status: 200 },
         },
         {
           client_ip: '192.168.1.2',
-          request: { uri: '/api/test2', method: 'POST' },
+          request: { uri: '/test2', method: 'POST' },
           response: { status: 201 },
         },
       ];
 
       const response = await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', VALID_BEARER_TOKEN)
         .send(logsData)
         .expect(201);
@@ -112,7 +112,7 @@ describe('ApiLogs E2E Tests', () => {
       };
 
       const response = await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', VALID_BEARER_TOKEN)
         .send(logData)
         .expect(201);
@@ -128,7 +128,7 @@ describe('ApiLogs E2E Tests', () => {
       const logData = {
         client_ip: '192.168.1.1',
         request: {
-          uri: '/api/complex',
+          uri: '/complex',
           method: 'POST',
           headers: {
             host: 'example.com',
@@ -161,7 +161,7 @@ describe('ApiLogs E2E Tests', () => {
       };
 
       const response = await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', VALID_BEARER_TOKEN)
         .send(logData)
         .expect(201);
@@ -175,7 +175,7 @@ describe('ApiLogs E2E Tests', () => {
 
     it('should handle empty ingestion', async () => {
       const response = await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', VALID_BEARER_TOKEN)
         .send({})
         .expect(201);
@@ -185,7 +185,7 @@ describe('ApiLogs E2E Tests', () => {
 
     it('should handle empty array', async () => {
       const response = await request(app.getHttpServer())
-        .post('/api/api-logs')
+        .post('/api-logs')
         .set('Authorization', VALID_BEARER_TOKEN)
         .send([])
         .expect(201);
