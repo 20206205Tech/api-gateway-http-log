@@ -6,7 +6,7 @@ export async function main(module: any) {
   }).compile();
 
   const app = moduleFixture.createNestApplication();
-  app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('api');
   await app.init();
 
   (global as any).app = app;
