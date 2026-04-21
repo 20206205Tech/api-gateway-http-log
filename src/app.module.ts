@@ -26,6 +26,9 @@ import { ApiLogsModule } from './modules/api-logs/api-logs.module';
             configService.get<string>('ENVIRONMENT') === 'development'
               ? true
               : false,
+         
+
+          synchronize: configService.get<string>('ENVIRONMENT') === 'test' ? true : false,
           ssl: configService.get<string>('ENVIRONMENT') === 'test' ? false : true,
           extra: {
             ssl:
