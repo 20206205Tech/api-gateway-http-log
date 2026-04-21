@@ -132,7 +132,9 @@ describe('AuthGuard', () => {
 
         // Assert
         expect(result).toBe(true);
-        expect(configService.get).toHaveBeenCalledWith('DECK_LOG_BEARER_TOKEN');
+        expect(configService.get).toHaveBeenCalledWith(
+          'API_GATEWAY_HTTP_LOG_BEARER',
+        );
       });
 
       it('should throw UnauthorizedException when token is invalid', async () => {

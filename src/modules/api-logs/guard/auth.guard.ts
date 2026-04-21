@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
     // 2. Lấy token chuẩn từ ConfigService (giả sử đây là token bạn mong đợi)
     const expectedToken = this.configService.get<string>(
-      'DECK_LOG_BEARER_TOKEN',
+      'API_GATEWAY_HTTP_LOG_BEARER',
     );
 
     // 3. Kiểm tra xem header có tồn tại và đúng định dạng Bearer không

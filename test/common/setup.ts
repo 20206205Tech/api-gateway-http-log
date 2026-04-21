@@ -21,9 +21,9 @@ async function startPostgresContainer(): Promise<StartedPostgreSqlContainer> {
 }
 
 async function seedSecrets(): Promise<void> {
-  process.env.DECK_LOG_BEARER_TOKEN = VALID_TOKEN;
+  process.env.API_GATEWAY_HTTP_LOG_BEARER = VALID_TOKEN;
 
-  process.env.DATABASE_URL_API_GATEWAY_HTTP_LOG =
+  process.env.API_GATEWAY_HTTP_LOG_DATABASE_URL =
     postgresContainer.getConnectionUri();
 }
 

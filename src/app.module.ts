@@ -17,7 +17,7 @@ import { ApiLogsModule } from './modules/api-logs/api-logs.module';
         return {
           type: 'postgres',
 
-          url: configService.get('DATABASE_URL_API_GATEWAY_HTTP_LOG'),
+          url: configService.get('API_GATEWAY_HTTP_LOG_DATABASE_URL'),
 
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
           autoLoadEntities: true,
@@ -26,10 +26,11 @@ import { ApiLogsModule } from './modules/api-logs/api-logs.module';
             configService.get<string>('ENVIRONMENT') === 'development'
               ? true
               : false,
-         
 
-          synchronize: configService.get<string>('ENVIRONMENT') === 'test' ? true : false,
-          ssl: configService.get<string>('ENVIRONMENT') === 'test' ? false : true,
+          synchronize:
+            configService.get<string>('ENVIRONMENT') === 'test' ? true : false,
+          ssl:
+            configService.get<string>('ENVIRONMENT') === 'test' ? false : true,
           extra: {
             ssl:
               configService.get<string>('ENVIRONMENT') === 'test'
