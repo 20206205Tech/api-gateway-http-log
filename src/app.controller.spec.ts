@@ -13,10 +13,16 @@ describe('AppController', () => {
 
     appController = app.get<AppController>(AppController);
   });
-
+ 
+  
+  
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return the welcome object', () => {
+      // Thay đổi .toBe('Hello World!') thành .toEqual({...})
+      expect(appController.getRoot()).toEqual({
+        message: 'Hello World',
+        docs: '/docs',
+      });
     });
   });
 });

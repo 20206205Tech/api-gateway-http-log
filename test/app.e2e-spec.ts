@@ -9,13 +9,23 @@ describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
 
   beforeAll(async () => {
+    // Giả sử main.util trả về instance đã được init()
     app = await main(AppModule);
   });
 
   it('GET /', async () => {
-    return request(app.getHttpServer())
-      .get('/api')
+    const response = await request(app.getHttpServer())
+      .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('Content-Type', /json/);
+
+    expect(response.body).toEqual({
+      message: 'Hello World',
+      docs: '/docs',
+    });
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 });
