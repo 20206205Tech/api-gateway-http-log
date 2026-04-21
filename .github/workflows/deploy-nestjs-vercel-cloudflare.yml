@@ -100,7 +100,7 @@ jobs:
           key: ${{ needs.install-deps.outputs.deps-cache-key }}
       - name: Build Project
         run: npm run build --if-present
-deploy:
+  deploy:
     if: github.ref == 'refs/heads/main'
     needs: [install-deps, unit-test, e2e-test, build]
     runs-on: ubuntu-latest
