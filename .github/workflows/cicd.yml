@@ -1,4 +1,4 @@
-name: Deploy NestJS to Vercel + Cloudflare DNS
+name: CICD
 
 on:
   push:
