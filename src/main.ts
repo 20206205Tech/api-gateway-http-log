@@ -1,4 +1,4 @@
-import { ConsoleLogger, Logger, ValidationPipe } from '@nestjs/common';
+import { ConsoleLogger, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   DocumentBuilder,
@@ -10,7 +10,7 @@ import { SWAGGER_AUTH_KEY } from './constants/swagger.constant';
 
 async function bootstrap() {
   const ENVIRONMENT = process.env.ENVIRONMENT ?? 'production';
-  const PORT = process.env.PORT ?? 3000;
+  const PORT = process.env.PORT ?? 30009;
   const SERVICE_NAME = 'api-gateway-http-log';
 
   // const SUPABASE_PROJECT_ID = process.env.SUPABASE_PROJECT_ID;
@@ -19,7 +19,6 @@ async function bootstrap() {
   DESCRIPTION += `# Chào mừng đến với ${SERVICE_NAME} (${ENVIRONMENT})\n`;
   // DESCRIPTION += `* [Google](https://${SUPABASE_PROJECT_ID}.supabase.co/auth/v1/authorize?provider=google)\n`;
   DESCRIPTION += `* [Local](http://localhost:${PORT})\n`;
-  // DESCRIPTION += `* [Dev](https://dev-${SERVICE_NAME}.20206205.tech/${SERVICE_NAME})\n`;
   DESCRIPTION = DESCRIPTION.trim();
 
   Logger.debug(`DESCRIPTION: \n${DESCRIPTION}`);
@@ -34,12 +33,12 @@ async function bootstrap() {
   //   exclude: ['/'],
   // });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true, // Loại bỏ các trường không được định nghĩa trong DTO
-      transform: true, // Tự động convert kiểu dữ liệu (vd: string sang number)
-    }),
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     whitelist: true, // Loại bỏ các trường không được định nghĩa trong DTO
+  //     transform: true, // Tự động convert kiểu dữ liệu (vd: string sang number)
+  //   }),
+  // );
 
   const configSwagger = new DocumentBuilder()
     .setTitle(`${SERVICE_NAME} (${ENVIRONMENT})`)

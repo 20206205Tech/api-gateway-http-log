@@ -22,13 +22,8 @@ import { ApiLogsModule } from './modules/api-logs/api-logs.module';
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
           autoLoadEntities: true,
 
-          logging:
-            configService.get<string>('ENVIRONMENT') === 'development'
-              ? true
-              : false,
-
-          synchronize:
-            configService.get<string>('ENVIRONMENT') === 'test' ? true : false,
+          logging: configService.get<string>('ENVIRONMENT') === 'development',
+          synchronize: configService.get<string>('ENVIRONMENT') === 'test',
           ssl:
             configService.get<string>('ENVIRONMENT') === 'test' ? false : true,
           extra: {
