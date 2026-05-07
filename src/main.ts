@@ -13,18 +13,14 @@ async function bootstrap() {
   const PORT = process.env.PORT ?? 3000;
   const SERVICE_NAME = 'api-gateway-http-log';
 
-  const SUPABASE_PROJECT_ID = process.env.SUPABASE_PROJECT_ID;
+  // const SUPABASE_PROJECT_ID = process.env.SUPABASE_PROJECT_ID;
 
-  const DESCRIPTION = `
-# Chào mừng đến với ${SERVICE_NAME} (${ENVIRONMENT})
-
-* [Local API](http://localhost:${PORT})
-* [Local Swagger](http://localhost:${PORT}/docs)
-* [Dev API](https://dev-code-${SERVICE_NAME}.20206205.tech)
-* [Dev Swagger](https://dev-code-${SERVICE_NAME}.20206205.tech/docs)
-* [Đăng nhập với Google](https://${SUPABASE_PROJECT_ID}.supabase.co/auth/v1/authorize?provider=google)
-
-  `.trim();
+  let DESCRIPTION = '';
+  DESCRIPTION += `# Chào mừng đến với ${SERVICE_NAME} (${ENVIRONMENT})\n`;
+  // DESCRIPTION += `* [Google](https://${SUPABASE_PROJECT_ID}.supabase.co/auth/v1/authorize?provider=google)\n`;
+  DESCRIPTION += `* [Local](http://localhost:${PORT})\n`;
+  // DESCRIPTION += `* [Dev](https://dev-${SERVICE_NAME}.20206205.tech/${SERVICE_NAME})\n`;
+  DESCRIPTION = DESCRIPTION.trim();
 
   Logger.debug(`DESCRIPTION: \n${DESCRIPTION}`);
 
@@ -37,7 +33,6 @@ async function bootstrap() {
   // app.setGlobalPrefix('api', {
   //   exclude: ['/'],
   // });
-
 
   app.useGlobalPipes(
     new ValidationPipe({
