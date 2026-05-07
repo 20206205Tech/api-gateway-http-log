@@ -55,8 +55,8 @@ jobs:
         uses: dopplerhq/secrets-fetch-action@v1.2.0
         with:
           doppler-token: ${{ secrets.DOPPLER_TOKEN }}
-          doppler-project: 20206205tech
-          doppler-config: kong
+          doppler-project: Kong-API-Gateway
+          doppler-config: prod-http-log
 
       - name: Test Coverage
         run: npm run test:cov
@@ -121,8 +121,8 @@ jobs:
         uses: dopplerhq/secrets-fetch-action@v1.2.0
         with:
           doppler-token: ${{ secrets.DOPPLER_TOKEN }}
-          doppler-project: 20206205tech
-          doppler-config: kong
+          doppler-project: Kong-API-Gateway
+          doppler-config: prod-http-log
           inject-env-vars: true
 
       - name: Generate Metadata
