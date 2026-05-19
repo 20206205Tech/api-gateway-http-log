@@ -17,7 +17,7 @@ async function bootstrap() {
 
   let DESCRIPTION = '';
   DESCRIPTION += `# Chào mừng đến với ${SERVICE_NAME} (${ENVIRONMENT})\n`;
-  // DESCRIPTION += `* [Google](https://${SUPABASE_PROJECT_ID}.supabase.co/auth/v1/authorize?provider=google)\n`;
+  // DESCRIPTION += `* [Google](https://${SUPABASE_PROJECT_ID}.supabase.co/auth/v1/authorize?provider=google&redirect_to=https://20206205tech.github.io/auth-callback)\n`;
   DESCRIPTION += `* [Local](http://localhost:${PORT})\n`;
   DESCRIPTION = DESCRIPTION.trim();
 
