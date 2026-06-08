@@ -61,7 +61,7 @@ jobs:
       - name: Test Coverage
         run: npm run test:cov
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ steps.doppler.outputs.CODECOV_TOKEN }}
           directory: ./coverage
